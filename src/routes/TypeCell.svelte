@@ -25,7 +25,12 @@
   }
 </script>
 
-<button class={`base-cell ${myAnswer === correctAnswer ? 'correct' : ''} ${myAnswer !== '?' ? answerColors[myAnswer] : ''}`} on:click={trigger}>
+<button class={`base-cell 
+  ${myAnswer === correctAnswer ? 'correct' : ''} 
+  ${myAnswer !== '?' ? answerColors[myAnswer] : ''}
+  ${isOpen ? 'flipped' : ''}`} 
+  on:click={trigger}
+  on:mouseleave={() => isOpen = false}>
 
   {#if isOpen}
     <OptionsMenu onSelect={setAnswer} />
@@ -45,6 +50,10 @@
     font-size: 2rem;
     color: black;
     position: relative;
+    transition: scale 0.18s ease-out;
+  }
+  .base-cell:hover{
+    scale: 1.1;
   }
   .base-cell:hover::after{
     border-radius: .5rem;
@@ -54,6 +63,12 @@
     position: absolute;
     pointer-events: none;
     background: rgba(255, 255, 255, 0.18);
+  }
+  .flipped{
+    scale: -1 1;
+  }
+  .flipped:hover{
+    scale: -1.1 1.1;
   }
   .correct{
     background-color:rgba(6, 136, 34, 0.604);

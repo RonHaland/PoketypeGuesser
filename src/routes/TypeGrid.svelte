@@ -72,13 +72,13 @@
   .grid-container{
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
   }
   .grid{
     display: grid;
     grid-template-columns: 2fr 3fr 3fr 3fr;
     grid-template-rows: 2fr 3fr 3fr 3fr;
-    gap: 2px;
+    gap: .5rem;
     text-align: center;
     width: 18rem;
     height: 18rem;
@@ -95,9 +95,22 @@
     padding: 0.5rem;
     border-radius: .75rem;
     border: 1px solid black;
-    margin: 0 2rem;
+    margin: 0.5rem 2rem;
     background: rgb(49, 70, 59);
     color:aliceblue;
+    transition: scale 0.1s ease-in-out;
+  }
+  button:hover{
+    scale:1.1;
+  }
+  button:hover::after{
+    border-radius: .5rem;
+    content:' ';
+    display: block;
+    inset:0;
+    position: absolute;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.18);
   }
   span {
     display: flex;

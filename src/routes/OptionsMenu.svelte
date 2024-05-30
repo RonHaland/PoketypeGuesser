@@ -21,6 +21,7 @@
     background-color: darkslategray;
     width: 100%;
     height: 100%;
+    scale: -1 1;
   }
   ul {
     list-style: none;
