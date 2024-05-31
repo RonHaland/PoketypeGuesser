@@ -9,7 +9,7 @@
 
 <section>
 	<h1>
-		Pokemon Type Guesser
+		Pokemon Type Effectiveness Guesser
 	</h1>
 
 	<div class="grid">

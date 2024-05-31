@@ -11,6 +11,9 @@
   let myAnswer: "?" | answerOption = '?';
   let isAnswered = false;
 
+  /** @type {HTMLButtonElement} */
+	let buttonElement: HTMLButtonElement;
+
   let isOpen = false;
 
   const trigger = (a: MouseEvent) => {
@@ -23,6 +26,15 @@
     isAnswered = true;
     updateFunc(defender, attacker, myAnswer === correctAnswer);
   }
+
+  const handleBlur = ({currentTarget, relatedTarget }: {currentTarget: any, relatedTarget:any }) =>{
+    if (currentTarget.contains(relatedTarget)) return;
+    isOpen = false;
+  }
+  const handleChildBlur = ({currentTarget, relatedTarget }: {currentTarget: any, relatedTarget:any }) =>{
+    if (buttonElement.contains(relatedTarget)) return;
+    isOpen = false;
+  }
 </script>
 
 <button class={`base-cell 
@@ -30,11 +42,12 @@
   ${myAnswer !== '?' ? answerColors[myAnswer] : ''}
   ${isOpen ? 'flipped' : ''}`} 
   on:click={trigger}
-  on:mouseleave={() => isOpen = false}>
+  on:blur={handleBlur}
+  bind:this={buttonElement}>
 
   {#if isOpen}
-    <OptionsMenu onSelect={setAnswer} />
-  {:else}
+    <OptionsMenu onSelect={setAnswer} handleChildBlur={handleChildBlur} />
+{:else}
   {myAnswer}
   {/if}
 </button>
@@ -51,6 +64,9 @@
     color: black;
     position: relative;
     transition: scale 0.18s ease-out;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding:0.125rem;
   }
   .base-cell:hover{
     scale: 1.1;
@@ -64,14 +80,15 @@
     pointer-events: none;
     background: rgba(255, 255, 255, 0.18);
   }
-  .flipped{
-    scale: -1 1;
+  .base-cell:focus{
+    outline: 2px solid white;
+  }
+  .base-cell.flipped{
+    background-color: rgb(65, 65, 65);
+    scale: -1.1 1.1;
   }
   .flipped:hover{
     scale: -1.1 1.1;
-  }
-  .correct{
-    background-color:rgba(6, 136, 34, 0.604);
   }
   .black{
     background-color: rgba(0, 0, 0, 1);

@@ -91,6 +91,15 @@
   .hidden>span{
     display: none;
   }
+  .full-row {
+    grid-column: 3 / -1;
+  }
+  
+  .full-column {
+    grid-row: 3 / -1;
+    rotate:-90deg;
+    height: 1.5rem;
+  }
   button{
     padding: 0.5rem;
     border-radius: .75rem;
@@ -100,8 +109,9 @@
     color:aliceblue;
     transition: scale 0.1s ease-in-out;
   }
-  button:hover{
+  button:hover, button:focus{
     scale:1.1;
+    outline:2px solid white;
   }
   button:hover::after{
     border-radius: .5rem;

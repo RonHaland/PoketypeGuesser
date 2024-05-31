@@ -2,6 +2,7 @@
 	import { answerColors, answerOptions, type answerOption } from "../types/answerOption";
 
   let options = answerOptions;
+  export let handleChildBlur: ({currentTarget, relatedTarget}:{currentTarget: any, relatedTarget:any }) => void;
   export let onSelect: (a:answerOption) => void;
 
 </script>
@@ -10,7 +11,7 @@
   <ul>
   {#each options as opt}
     <li>
-      <button on:click={() => onSelect(opt)} class={answerColors[opt]}>{opt}</button>
+      <button on:click={() => onSelect(opt)} on:blur={handleChildBlur} class={answerColors[opt]}>{opt}</button>
     </li>
   {/each}
   </ul>
@@ -18,7 +19,6 @@
 
 <style>
   .option-root{
-    background-color: darkslategray;
     width: 100%;
     height: 100%;
     scale: -1 1;
@@ -44,6 +44,7 @@
     border: 1px solid rgba(255, 255, 255, 0.264);
     border-radius: 0.25rem;
     position: relative;
+    padding: 0;
   }
   button:hover::after{
     content:' ';
@@ -52,12 +53,15 @@
     position: absolute;
     background: rgba(255, 255, 255, 0.08);
   }
+  button:focus{
+    outline: 2px solid white;
+  }
   .black{
     background-color: rgba(0, 0, 0, 0.667);
     color: #aaa;
   }
   .red{
-    background-color: rgba(196, 17, 17, 0.139);
+    background-color: rgba(196, 17, 17, 0.301);
   }
   .grey{
     background-color: rgba(104, 104, 104, 0.22);
